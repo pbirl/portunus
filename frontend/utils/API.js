@@ -8,20 +8,17 @@ const API = axios.create({
     'X-REQUESTED-WITH': 'XMLHttpRequest',
     'Content-Type': 'application/json',
     'X-CSRFToken': Cookies.get('csrftoken'),
- },
-})
+  },
+});
 
-const register = payload => API.post('auth/register', payload);
+const setupCsrf = () => API.get('set_csrf/');
 
-const login = payload => API.post('auth/login', payload);
+const register = payload => API.post('auth/register/', payload);
 
-const logout = () => API.post('auth/logout');
+const login = payload => API.post('auth/login/', payload);
 
-const refresh = () => API.post('auth/token/refresh');
+const logout = () => API.post('auth/logout/');
 
-export {
-  register,
-  login,
-  logout,
-  refresh,
-}
+const refresh = () => API.post('auth/token/refresh/');
+
+export { setupCsrf, register, login, logout, refresh };
